@@ -25,3 +25,27 @@ variable "policyArn" {
 variable "accessConfig" {
   default = "API_AND_CONFIG_MAP"
 }
+
+variable "dbUserPedidos" {
+  default = "sa"
+}
+
+variable "dbPasswordPedidos" {
+  default = "Senha12345"
+}
+
+variable "dbUserProdutos" {
+  default = "sa"
+}
+
+variable "dbPasswordProdutos" {
+  default = "Senha12345"
+}
+
+variable "dbUserPagamentos" {
+  default = "sa"
+}
+
+variable "dbPasswordpagamentos" {
+  default = "Senha12345"
+}
