@@ -52,7 +52,7 @@ terraform validate
 Antes de aplicar as mudanças, gere um plano detalhado para visualizar o que será criado ou modificado.
 
 ```bash
-terraform plan -out=tfplan
+terraform plan -out=tfplan -var accountIdVoclabs=NNNNNNNNNNNN
 ```
 
 #### **d) Visualizar o Plano de Execução**
