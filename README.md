@@ -31,10 +31,10 @@ Este tutorial mostra o passo a passo para criar um cluster Kubernetes na AWS e c
 
 ---
 
-### **1. Criar o Cluster e os Nós com o Terraform (`snacktech-infra-k8s`)**
+### **1. Criar o Cluster e os Nós com o Terraform (`snacktech-infra-microsservicos`)**
 
 #### **a) Inicializar o Terraform**
-Inicie o Terraform no diretório do projeto para baixar os provedores e configurar o backend remoto, se necessário. Os parametros bucket do comando abaixo deve corresponder a um bucket previamente criado no S3 da sua conta.
+Inicie o Terraform no diretório do projeto para baixar os provedores e configurar o backend remoto. O parametro "bucket" do comando abaixo deve ser substituido pelo nome de um bucket previamente criado no S3 da sua conta.
 
 ```bash
 terraform init -backend-config="bucket=snacktech-tfstate" -backend-config="key=terraform.tfstate" -backend-config="region=us-east-1"
@@ -49,7 +49,7 @@ terraform validate
 ```
 
 #### **c) Gerar o Plano de Execução**
-Antes de aplicar as mudanças, gere um plano detalhado para visualizar o que será criado ou modificado.
+Antes de aplicar as mudanças, gere um plano detalhado para visualizar o que será criado ou modificado. Neste comando informe o role-id a ser usado. Esse id pode se obtido na página do IAM, dentro do role voclabs da conta LAB da AWS Academy.
 
 ```bash
 terraform plan -out=tfplan -var accountIdVoclabs=NNNNNNNNNNNN
@@ -88,3 +88,13 @@ Verifique se os nós do cluster estão ativos.
 
 ```bash
 kubectl get nodes
+```
+#### **h) Destruir a infra criada**
+- Apague manualmente todas as imagens armazenadas dentro dos ECRs
+- Rode o comando abaixo com o mesmo numero de role-id usado no comando plan
+
+```bash
+terraform destroy -var accountIdVoclabs=NNNNNNNNNNNNN
+```
+
+
