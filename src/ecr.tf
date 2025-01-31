@@ -1,24 +1,32 @@
 #criar um ecr para guardar as imagens da API
-resource "aws_ecr_repository" "api-produtos-ecr" {
+resource "aws_ecr_repository" "ecr_api_produtos" {
   name = "ecr-${var.projectName}-api-produtos"
 }
 
-resource "aws_ecr_repository" "api-pagamentos-ecr" {
+resource "aws_ecr_repository" "ecr_api_pagamentos" {
   name = "ecr-${var.projectName}-api-pagamentos"
 }
 
-resource "aws_ecr_repository" "api-pedidos-ecr" {
+resource "aws_ecr_repository" "ecr_api_pedidos" {
   name = "ecr-${var.projectName}-api-pedidos"
 }
 
-output "api-produtos-ecr" {
-  value = aws_ecr_repository.api-produtos-ecr.repository_url
+resource "aws_ecr_repository" "ecr_worker_pagamento" {
+  name = "ecr-${var.projectName}-worker-pagamento"
 }
 
-output "api-pagamentos-ecr" {
-  value = aws_ecr_repository.api-pagamentos-ecr.repository_url
+output "ecr_api_produtos" {
+  value = aws_ecr_repository.ecr_api_produtos.repository_url
 }
 
-output "api-pedidos-ecr" {
-  value = aws_ecr_repository.api-pedidos-ecr.repository_url
+output "ecr_api_pagamentos" {
+  value = aws_ecr_repository.ecr_api_pagamentos.repository_url
+}
+
+output "ecr_api_pedidos" {
+  value = aws_ecr_repository.ecr_api_pedidos.repository_url
+}
+
+output "ecr_worker_pagamento" {
+  value = aws_ecr_repository.ecr_worker_pagamento.repository_url
 }

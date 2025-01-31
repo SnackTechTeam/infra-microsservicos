@@ -41,11 +41,3 @@ variable "dbUserProdutos" {
 variable "dbPasswordProdutos" {
   default = "Senha12345"
 }
-
-variable "dbUserPagamentos" {
-  default = "sa"
-}
-
-variable "dbPasswordpagamentos" {
-  default = "Senha12345"
-}
