@@ -15,23 +15,25 @@ Este projeto utiliza o Terraform para criar e gerenciar a infraestrutura de um c
 
 Os seguintes arquivos Terraform são utilizados para criar a infraestrutura:
 
-* [src/backend.tf](src/backend.tf): define o backend do Terraform para armazenar o estado da infraestrutura. A especificação do backend é vazia para exigir que ela seja passada como parametro do comando init.
-* [src/eks-cluster.tf](src/eks-cluster.tf): cria o cluster Kubernetes e define sua configuração.
-* [src/eks-nodeg.tf](src/eks-nodeg.tf): cria o grupo de nós do cluster.
-* [src/sg.tf](src/sg.tf): cria o security group para o cluster.
-* [src/ecr.tf](src/ecr.tf): cria os repositórios ECR.
-* [src/data.tf](src/data.tf): define os dados necessários para criar a infraestrutura.
-* [src/vars.tf](src/vars.tf): define as variáveis utilizadas nos arquivos Terraform.
+* [src/backend.tf](backend.tf): define o backend do Terraform para armazenar o estado da infraestrutura. A especificação do backend é vazia para exigir que ela seja passada como parametro do comando init.
+* [src/eks-cluster.tf](eks-cluster.tf): cria o cluster Kubernetes e define sua configuração.
+* [src/eks-nodeg.tf](eks-nodeg.tf): cria o grupo de nós do cluster.
+* [src/sg.tf](sg.tf): cria o security group para o cluster.
+* [src/ecr.tf](ecr.tf): cria os repositórios ECR.
+* [src/db-pedidos-instance.tf](db-pedidos-instance.tf): cria o banco RDS para o serviço de pedidos.
+* [src/db-produtos-instance.tf](db-produtos-instance.tf): cria o banco RDS para o serviç0 de produtos.
+* [src/data.tf](data.tf): define os dados necessários para criar a infraestrutura.
+* [src/vars.tf](vars.tf): define as variáveis utilizadas nos arquivos Terraform.
 
 
 
-### Tutorial de Implantação do Cluster Kubernetes com Terraform
+### Tutorial de Implantação através de execução local do terraform
 
-Este tutorial mostra o passo a passo para criar um cluster Kubernetes na AWS e configurar os nós necessários para a aplicação.
+Este tutorial mostra o passo a passo para criar um cluster Kubernetes na AWS e configurar, necessário possuir as aplicações terraform, aws e kubectl instaladas e configuradas.
 
 ---
 
-### **1. Criar o Cluster e os Nós com o Terraform (`snacktech-infra-microsservicos`)**
+### **1. Criar o Cluster e os Nós com o Terraform**
 
 #### **a) Inicializar o Terraform**
 Inicie o Terraform no diretório do projeto para baixar os provedores e configurar o backend remoto. O parametro "bucket" do comando abaixo deve ser substituido pelo nome de um bucket previamente criado no S3 da sua conta.
@@ -49,7 +51,7 @@ terraform validate
 ```
 
 #### **c) Gerar o Plano de Execução**
-Antes de aplicar as mudanças, gere um plano detalhado para visualizar o que será criado ou modificado. Neste comando informe o role-id a ser usado. Esse id pode se obtido na página do IAM, dentro do role voclabs da conta LAB da AWS Academy.
+Antes de aplicar as mudanças, gere um plano detalhado para visualizar o que será criado ou modificado. Neste comando substituia NNNNNNNNNNNN pelo valor de um role-id válido. Esse id pode se obtido na página do IAM, dentro do role voclabs da conta LAB da AWS Academy.
 
 ```bash
 terraform plan -out=tfplan -var accountIdVoclabs=NNNNNNNNNNNN
@@ -97,4 +99,18 @@ kubectl get nodes
 terraform destroy -var accountIdVoclabs=NNNNNNNNNNNNN
 ```
 
+### **2. Ajustar configuração do pipeline para deploy usando Github Action**
+O procedimento abaixo diz respeito a atualização de variables e secrets do Team. Não sobrescreva os valores incluidos no Team através de parametros especificos do repositório, isso vai causar problemas durante um deploy conjunto. 
 
+#### **a) Ajustar credenciais AWS**
+A cada nova execução do pipeline os valores das credenciais devem ser atualizados. Esses valores devem ser incluídos noos secrets de nome:
+- AWS_ACCESS_KEY_ID
+- AWS_SECRET_ACCESS_KEY
+- AWS_SECRET_ACCESS_TOKEN
+- AWS_ACCOUNT_ID_VOCLABS (número do role-id do voclabs, obtido na página do IAM)
+
+#### **b) Ajustar bucket do tf-state**
+Sempre que ocorrer troca da conta destino do deploy trocar o valor da variável **BACKEND_BUCKET_NAME**, o valor deve corresponder a um bucket S3 previamente criado na conta do deploy.
+
+#### **c) Ajustar parametros de banco de dados**
+A troca da conta destino do deploy, vai gerar instancias de banco de dados com endereços diferentes. Ou seja, após o deploy atualize manualmente os secrets que contém CONNECTION_STRING.

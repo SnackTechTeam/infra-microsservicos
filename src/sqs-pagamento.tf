@@ -2,7 +2,6 @@ resource "aws_sqs_queue" "sqs_pagamentos" {
   name                    = "${var.projectName}-sqs-pagamentos" # Give your queue a descriptive name
   delay_seconds           = 0 # How long (in seconds) messages are delayed before becoming available
   visibility_timeout_seconds = 30 # How long (in seconds) a message is hidden from other consumers after being received
-
   tags = {
     Name        = "${var.projectName}-sqs-pagamentos" 
   }
@@ -10,9 +9,7 @@ resource "aws_sqs_queue" "sqs_pagamentos" {
 
 resource "aws_sqs_queue" "sqs_pagamentos_dlq" {
   name                    = "${var.projectName}-sqs-pagamentos-dlq"
-  fifo_queue              = false
   visibility_timeout_seconds = 30
-
   tags = {
     Name        = "${var.projectName}-sqs-pagamentos-dlq"
   }
