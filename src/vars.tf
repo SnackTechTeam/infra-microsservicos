@@ -41,3 +41,7 @@ variable "dbUserProdutos" {
 variable "dbPasswordProdutos" {
   default = "Senha12345"
 }
+
+variable "sqsPagamentosQueueName" {
+  default = "snacktech-processed-payments"
+}

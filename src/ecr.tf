@@ -1,14 +1,14 @@
 #criar um ecr para guardar as imagens da API
 resource "aws_ecr_repository" "ecr_api_produtos" {
-  name = "ecr-${var.projectName}-api-produtos"
+  name = "ecr-${var.projectName}-api-products"
 }
 
 resource "aws_ecr_repository" "ecr_api_pagamentos" {
-  name = "ecr-${var.projectName}-api-pagamentos"
+  name = "ecr-${var.projectName}-api-payment"
 }
 
 resource "aws_ecr_repository" "ecr_api_pedidos" {
-  name = "ecr-${var.projectName}-api-pedidos"
+  name = "ecr-${var.projectName}-api-orders"
 }
 
 resource "aws_ecr_repository" "ecr_worker_pagamento" {
