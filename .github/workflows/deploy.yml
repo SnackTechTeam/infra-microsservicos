@@ -66,4 +66,4 @@ jobs:
 
     # 9. Implantar servidor de metricas para o cluster
     - name: Deploy Metrics Server
-      run: kubectl apply -f ./src/k8s/metrics-server.yaml
+      run: kubectl apply -f k8s/metrics-server.yaml
