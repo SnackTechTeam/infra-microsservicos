@@ -53,3 +53,17 @@ jobs:
     # 7. Aplicar o plano do Terraform
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
+
+    # 8. Configurar o Kubectl
+    - name: Install Kubectl
+      run: |
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        chmod +x kubectl
+        sudo mv kubectl /usr/local/bin/
+    - name: Configure Kubectl
+      run: |
+        aws eks --region ${{ vars.AWS_REGION }} update-kubeconfig --name ${{ vars.PROJECT_NAME }}
+
+    # 9. Implantar servidor de metricas para o cluster
+    - name: Deploy Metrics Server
+      run: kubectl apply -f ./src/k8s/metrics-server.yaml
