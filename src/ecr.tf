@@ -12,7 +12,7 @@ resource "aws_ecr_repository" "ecr_api_pedidos" {
 }
 
 resource "aws_ecr_repository" "ecr_worker_pagamento" {
-  name = "ecr-${var.projectName}-worker-pagamento"
+  name = "ecr-${var.projectName}-worker-payment"
 }
 
 output "ecr_api_produtos" {
