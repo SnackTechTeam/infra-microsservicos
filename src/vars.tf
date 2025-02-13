@@ -11,7 +11,7 @@ variable "vpcCidr" {
 }
 
 variable "instanceType" {
-  default = "t2.xlarge"
+  default = "t3.micro"
 }
 
 variable "accountIdVoclabs" {

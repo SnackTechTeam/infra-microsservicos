@@ -1,7 +1,13 @@
 resource "aws_sqs_queue" "sqs_pagamentos" {
-  name                    = var.sqsPagamentosQueueName # Give your queue a descriptive name
-  delay_seconds           = 0 # How long (in seconds) messages are delayed before becoming available
-  visibility_timeout_seconds = 30 # How long (in seconds) a message is hidden from other consumers after being received
+  name                    = var.sqsPagamentosQueueName
+  delay_seconds           = 0
+  visibility_timeout_seconds = 30
+  message_retention_seconds = 345600 # 4 dias
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = aws_sqs_queue.sqs_pagamentos_dlq.arn,
+    maxReceiveCount     = 5,
+  })
+
   tags = {
     Name        = var.sqsPagamentosQueueName
   }
@@ -10,6 +16,7 @@ resource "aws_sqs_queue" "sqs_pagamentos" {
 resource "aws_sqs_queue" "sqs_pagamentos_dlq" {
   name                    = "${var.sqsPagamentosQueueName}-dlq"
   visibility_timeout_seconds = 30
+  message_retention_seconds = 1209600 # 14 days
   tags = {
     Name        = "${var.sqsPagamentosQueueName}-dlq"
   }
