@@ -14,9 +14,10 @@ jobs:
   
       - name: Install SonarScanner
         uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: "https://sonarcloud.io" # Optional, but recommended
-          SONAR_ORGANIZATION: "snacktechteam" # If you have an organization
-          SONAR_PROJECT_KEY: "SnackTechTeam_infra-microsservicos" # Your project key
+        with:
+          sonar.projectKey: "SnackTechTeam_infra-microsservicos"
+          sonar.organization: "snacktechteam"
+          sonar.host.url: "https://sonarcloud.io"
+          sonar.login: ${{ secrets.SONAR_TOKEN }}
+          
   
