@@ -5,7 +5,7 @@ Segue abaixo video descritivo da entrega dessa fase.
 #### [Video de apresentação Fase 4](https://www.youtube.com/) 
 
 ## Descrição geral da arquitetura do sistema Snacktech
-Os serviços hospedados na estrutura criada por eles são uma refatoração do projeto original [Snacktech](https://github.com/SnackTechTeam/SnackTech). Nele pode ser obtida a descrição dos requisitos do sistema. 
+Os serviços hospedados na estrutura criada são uma refatoração do projeto original [Snacktech](https://github.com/SnackTechTeam/SnackTech). Nele pode ser obtida a descrição dos requisitos do sistema. 
 
 Para essa fase, a aplicação original foi refatorada e dividida em 3 microsserviços.
 
@@ -14,16 +14,16 @@ Aplicação responsável por administrar e fornecer as informações dos produto
 Repositório: [snacktech-api-products](https://github.com/SnackTechTeam/snacktech-api-products)
 
 ### Microsserviço Pedidos
-Aplicação responsável por administrar e fornecer as informações de Cliente e Pedidos. Ela é composta por uma WebApi .NET, um Worker e um banco de dados RDS Microsoft Sql Server. O Worker aqui cumpre a tarefa de receber de forma assincrona a confirmação do pagamento dos pedidos. 
+Aplicação responsável por administrar e fornecer as informações de Cliente e Pedidos. Ela é composta por uma WebApi .NET, um Worker .Net e um banco de dados RDS Microsoft Sql Server. O Worker aqui cumpre a tarefa de receber de forma assincrona a confirmação do pagamento dos pedidos. 
 Repositório API: [snacktech-api-orders](https://github.com/SnackTechTeam/snacktech-api-orders)
 Repositório Worker: [snacktech-worker-payment](https://github.com/SnackTechTeam/snacktech-worker-payment)
 
 ### Microsserviço Pagamento
-Aplicação responsável por intermediar o contato com a operadora dos pagamentos, para este projeto essa operadora é o Mercado Pago. Ela é composta por uma WebApi e um banco de dados MongoDB hospedado no serviço Atlas.
+Aplicação responsável por intermediar o contato com a operadora dos pagamentos, para este projeto essa operadora é o Mercado Pago. Ela é composta por uma WebApi e um banco de dados MongoDB hospedado no serviço Atlas. Esse banco é criado manualmente usando uma conta freetier do MongoDBAtlas.
 Repositório: [snacktech-api-payment](https://github.com/SnackTechTeam/snacktech-api-payment)
 
 ### Descrição simplificada de uma trilha do sistema
-O fluxo abaixo serve para dar uma idéia geral da arquitetura de informação dentro do sistema. Vamos descrever um processo que começa com o cadastramento de um produto, depois do cliente, criação do pedido e evolução deste pedido até sua finalização.
+O fluxo abaixo serve para dar uma idéia geral da arquitetura de informação dentro do sistema. Vamos descrever um processo que começa com o cadastramento de um produto, depois do cliente, segue criação do pedido e evolução deste pedido até sua finalização.
 
 1. Efetuar Post no endpoint api/Produtos da API de produtos com os dados do novo produto. Esse produto agora pode ser consultado por Id ou por sua categoria.
 2. Efetuar Post no endpoint api/Clientes da API de pedidos com os dados no novo cliente.
