@@ -15,6 +15,8 @@ jobs:
       - name: Install SonarScanner
         uses: sonarsource/sonarqube-scan-action@master
         with:
+          sonarScannerCliVersion: 'latest' 
+          config: .sonar/sonar-project.properties 
           args: >
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
             -Dsonar.projectKey=SnackTechTeam_infra-microsservicos
@@ -22,4 +24,3 @@ jobs:
             -Dsonar.host.url="https://sonarcloud.io"
             -Dsonar.branch.name=${{ github.ref_name }}
             -Dsonar.projectName=SnackTechTeam_infra-microsservicos
-          
