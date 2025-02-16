@@ -18,6 +18,5 @@ jobs:
           sonar.projectKey: "SnackTechTeam_infra-microsservicos"
           sonar.organization: "snacktechteam"
           sonar.host.url: "https://sonarcloud.io"
-          sonar.login: ${{ secrets.SONAR_TOKEN }}
+          sonar.token: ${{ secrets.SONAR_TOKEN }}
           
-  
