@@ -1,0 +1,26 @@
+name: sonarqube
+
+on:
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  sonar-analysis:
+    name: Analyze SnackTech
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+  
+      - name: Install SonarScanner
+        uses: sonarsource/sonarqube-scan-action@master
+        with:
+          sonarScannerCliVersion: 'latest' 
+          config: .sonar/sonar-project.properties 
+          args: >
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.projectKey=SnackTechTeam_infra-microsservicos
+            -Dsonar.organization=snacktechteam
+            -Dsonar.host.url="https://sonarcloud.io"
+            -Dsonar.branch.name=${{ github.ref_name }}
+            -Dsonar.projectName=SnackTechTeam_infra-microsservicos
