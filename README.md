@@ -55,6 +55,10 @@ O fluxo abaixo serve para dar uma idéia geral da arquitetura de informação de
 * **Filas SQS**: são criadas duas filas sendo uma a fila principal para conclusão de pagamentos e uma fila adicional para implementar o padrão DLQ (Dead Letter Queue).
 * **Bancos de dados RDS**: São criados dois bancos de dados RDS para suporte aos serviços de produtos e pedidos.
 
+### Desenho
+
+<img src="docs/imgs/DesenhoArquitetura.png"/>
+
 ### Arquivos Terraform
 
 Esses são os principais manifestos Terraform utilizados para criar a infraestrutura:
