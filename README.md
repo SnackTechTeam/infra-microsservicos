@@ -2,7 +2,7 @@
 Este projeto utiliza o Terraform para criar e gerenciar a infraestrutura de microsserviços para o sistema Snacktech.
 Este sistema foi desenvolvido como parte do processo de avaliação da quarta fase do curso de pósgraduação em Arquitetura de Software da FIAP.
 Segue abaixo video descritivo da entrega dessa fase.
-#### [Video de apresentação Fase 4](https://www.youtube.com/) 
+#### [Video de apresentação Fase 4](https://youtu.be/Cyjp2I-uDr4) 
 
 ## Descrição geral da arquitetura do sistema Snacktech
 Os serviços hospedados na estrutura criada são uma refatoração do projeto original [Snacktech](https://github.com/SnackTechTeam/SnackTech). Nele pode ser obtida a descrição dos requisitos do sistema. 
@@ -163,3 +163,10 @@ A troca da conta destino do deploy, vai gerar instancias de banco de dados com e
 
 Este repositório possui um pipeline configurado para executar análise de vulnerabilidades com Sonarqube e o deploy da infraestrutura. 
 Como resultado de um PR aprovado para a branch main, é desencadeado o processo de deploy para uma conta AWS previamente configurada nas variáveis de ambiente.
+
+## Equipe
+
+* Adriano de Melo Costa. Email: adriano.dmcosta@gmail.com
+* Rafael Duarte Gervásio da Silva. Email: rafael.dgs.1993@gmail.com
+* Guilherme Felipe de Souza. Email: gui240799@outlook.com
+* Dayvid Ribeiro Correia. Email: dayvidrc@gmail.com
